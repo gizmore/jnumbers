@@ -24,9 +24,6 @@
  */
 package org.jnumbers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Basic DMS converter
  *
@@ -34,8 +31,6 @@ import org.slf4j.LoggerFactory;
  */
 public final class DMSConverter {
 
-	/** Logger */
-	private static final Logger _logger = LoggerFactory.getLogger(DMSConverter.class.getName());
 	/** Specify the value of one arcminute in degrees */
 	public static final double DEG_IN_ARCMIN = 60d;
 	/** Specify the value of one arcminute in degrees */
@@ -76,7 +71,7 @@ public final class DMSConverter {
 
 		// HMS can be given as HH:MM:SS.TT or HH MM SS.TT. 
 		// Replace ':' by ' ', and remove trailing and leading space
-		final String input = hms.replace(':', ' ').trim();
+		final String input =  hms.replace(':', ' ').trim();
 
 		double hh = 0d;
 		double hm = 0d;
@@ -99,7 +94,7 @@ public final class DMSConverter {
 			}
 
 		} catch (NumberFormatException nfe) {
-			_logger.debug("format exception: ", nfe);
+			System.err.println("format exception: " + nfe.getMessage());
 			hh = hm = hs = Double.NaN;
 		}
 
@@ -110,9 +105,9 @@ public final class DMSConverter {
 		// note : hh already includes the sign :
 		final double angle = (hh + sign * (hm * ARCMIN_IN_DEGREES + hs * ARCSEC_IN_DEGREES)) * HOUR_IN_DEGREES;
 
-		if (_logger.isDebugEnabled()) {
-			_logger.debug("HMS : ’" + hms + "' = '" + angle + "'.");
-		}
+//		if (_logger.isDebugEnabled()) {
+//			_logger.debug("HMS : ’" + hms + "' = '" + angle + "'.");
+//		}
 
 		return angle;
 	}
@@ -151,7 +146,7 @@ public final class DMSConverter {
 			}
 
 		} catch (NumberFormatException nfe) {
-			_logger.debug("format exception: ", nfe);
+			System.err.println("format exception: " + nfe.getMessage());
 			dd = dm = ds = Double.NaN;
 		}
 
@@ -162,9 +157,9 @@ public final class DMSConverter {
 		// note : dd already includes the sign :
 		final double angle = dd + sign * (dm * ARCMIN_IN_DEGREES + ds * ARCSEC_IN_DEGREES);
 
-		if (_logger.isDebugEnabled()) {
-			_logger.debug("DMS : ’" + dms + "' = '" + angle + "'.");
-		}
+//		if (_logger.isDebugEnabled()) {
+//			_logger.debug("DMS : ’" + dms + "' = '" + angle + "'.");
+//		}
 
 		return angle;
 	}
@@ -221,7 +216,7 @@ public final class DMSConverter {
 			}
 
 		} catch (NumberFormatException nfe) {
-			_logger.debug("format exception: ", nfe);
+			System.err.println("format exception: " + nfe.getMessage());
 			dd = dm = ds = Double.NaN;
 		}
 
@@ -232,9 +227,9 @@ public final class DMSConverter {
 		// note : dd already includes the sign :
 		final double angle = dd + sign * (dm * ARCMIN_IN_DEGREES + ds * ARCSEC_IN_DEGREES);
 
-		if (_logger.isDebugEnabled()) {
-			_logger.debug("DMS : ’" + dms + "' = '" + angle + "'.");
-		}
+//		if (_logger.isDebugEnabled()) {
+//			_logger.debug("DMS : ’" + dms + "' = '" + angle + "'.");
+//		}
 
 		return angle;
 	}
@@ -291,7 +286,7 @@ public final class DMSConverter {
 			}
 
 		} catch (NumberFormatException nfe) {
-			_logger.debug("format exception: ", nfe);
+			System.err.println("format exception: " + nfe.getMessage());
 			dd = dm = ds = Double.NaN;
 		}
 
@@ -302,9 +297,9 @@ public final class DMSConverter {
 		// note : dd already includes the sign :
 		final double angle = dd + sign * (dm * ARCMIN_IN_DEGREES + ds * ARCSEC_IN_DEGREES);
 
-		if (_logger.isDebugEnabled()) {
-			_logger.debug("DMS : ’" + dms + "' = '" + angle + "'.");
-		}
+//		if (_logger.isDebugEnabled()) {
+//			_logger.debug("DMS : ’" + dms + "' = '" + angle + "'.");
+//		}
 
 		return angle;
 	}
