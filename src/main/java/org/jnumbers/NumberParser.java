@@ -324,7 +324,7 @@ public final class NumberParser {
             }
 
             // Check for fractional values after decimal
-            if ((len > 0) && (csq.charAt(off) == '.')) {
+            if ((len > 0) && (csq.charAt(off) == '.' || csq.charAt(off) == ',')) {
 
                 off++;
                 len--;
