@@ -42,17 +42,17 @@ public final class CharSequenceKey {
     }
 
     public void update(final CharSequence key) {
-        this.hashcode = hashCode(key);
+        this.hashcode = key.hashCode(); // better use hashCode impl of paramter. it might be cached?
         this.key = key;
     }
 
-    static int hashCode(final CharSequence csq) {
-        int h = 0;
-        for (int i = 0, len = csq.length(); i < len; i++) {
-            h = 31 * h + csq.charAt(i);
-        }
-        return h;
-    }
+//    static int hashCode(final CharSequence csq) {
+//        int h = 0;
+//        for (int i = 0, len = csq.length(); i < len; i++) {
+//            h = 31 * h + csq.charAt(i);
+//        }
+//        return h;
+//    }
 
     @Override
     public int hashCode() {
@@ -61,7 +61,7 @@ public final class CharSequenceKey {
 
     @Override
     public boolean equals(final Object obj) {
-        if (obj instanceof CharSequenceKey) {
+//        if (obj instanceof CharSequenceKey) { hehehe
             final CharSequence o = ((CharSequenceKey) obj).key;
             final CharSequence k = this.key;
             int n = k.length();
@@ -75,7 +75,7 @@ public final class CharSequenceKey {
                 }
                 return true;
             }
-        }
+//        }
         return false;
     }
 
