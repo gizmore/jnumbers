@@ -1,5 +1,19 @@
-jnumbers library
-================
+jnumbers library - gizmore edition
+==================================
+
+Thanks for this fantastic library :)
+
+
+gizmore stuff
+=============
+
+ - A tiny tad faster.
+ - Adds Eclipse to gitignore.
+ - Upstream pull requests might happen.
+
+
+jnumbers
+========
 
 jnumbers is an open-source Java library having a single goal: 
 **Faster number parsing and Faster number formatting than Java standard classes**:
@@ -15,6 +29,7 @@ but is correct (and enough for all-purposes) ~ 2 ulps (ie 5e-16 relative error)
 
 Latest release: https://github.com/bourgesl/jnumbers/releases/latest
 
+
 License
 =======
 
@@ -22,7 +37,12 @@ jnumbers is provided under the Simplified BSD license.
 
 See LICENSE
 
+
 Documentation
 =============
 Documentation on how to use the library is available in the [wiki] https://github.com/bourgesl/jnumbers/wiki
 
+
+Authors
+=======
+@TODO: add authors
