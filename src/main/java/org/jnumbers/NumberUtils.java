@@ -32,12 +32,10 @@ package org.jnumbers;
  */
 public final class NumberUtils {
 
-    private final static boolean USE_FAST_NUMBER_PARSER = true;
-
-    public final static char NULL_CHAR = 0;
-    public final static short NULL_SHORT = Short.MIN_VALUE;
-    public final static int NULL_INT = Integer.MIN_VALUE;
-    public final static long NULL_LONG = Long.MIN_VALUE;
+    public final static char NULL_CHAR = '\0';
+    public final static short NULL_SHORT = 0;
+    public final static int NULL_INT = 0;
+    public final static long NULL_LONG = 0L;
     public final static float NULL_FLOAT = Float.NaN;
     public final static double NULL_DOUBLE = Double.NaN;
 
@@ -51,14 +49,10 @@ public final class NumberUtils {
      */
     public static double parseDouble(final CharSequence value) {
         try {
-            if (USE_FAST_NUMBER_PARSER) {
-                return NumberParser.getDouble(value, 0, value.length());
-            }
-            return Double.parseDouble(value.toString());
+        	return NumberParser.getDouble(value, 0, value.length());
         } catch (NumberFormatException nfe) {
-            // ignore
+        	return NULL_DOUBLE;
         }
-        return NULL_DOUBLE;
     }
 
     /**
@@ -71,30 +65,26 @@ public final class NumberUtils {
      */
     public static float parseFloat(final CharSequence value) {
         try {
-            if (USE_FAST_NUMBER_PARSER) {
-                final double val = NumberParser.getDouble(value, 0, value.length());
-                if (Double.isNaN(val)) {
-                    return NULL_FLOAT;
-                }
-                if (val == Double.POSITIVE_INFINITY) {
-                    return Float.POSITIVE_INFINITY;
-                }
-                if (val == Double.NEGATIVE_INFINITY) {
-                    return Float.NEGATIVE_INFINITY;
-                }
-                if (val <= Float.MIN_VALUE) {
-                    return NULL_FLOAT;
-                }
-                if (val >= Float.MAX_VALUE) {
-                    return NULL_FLOAT;
-                }
-                return (float) val;
+            final double val = NumberParser.getDouble(value, 0, value.length());
+            if (Double.isNaN(val)) {
+                return NULL_FLOAT;
             }
-            return Float.parseFloat(value.toString());
+            if (val == Double.POSITIVE_INFINITY) {
+                return Float.POSITIVE_INFINITY;
+            }
+            if (val == Double.NEGATIVE_INFINITY) {
+                return Float.NEGATIVE_INFINITY;
+            }
+            if (val <= Float.MIN_VALUE) {
+                return Float.MIN_VALUE;
+            }
+            if (val >= Float.MAX_VALUE) {
+                return Float.MAX_VALUE;
+            }
+            return (float) val;
         } catch (NumberFormatException nfe) {
-            // ignore
+        	return NULL_FLOAT;
         }
-        return NULL_FLOAT;
     }
 
     /**
@@ -107,14 +97,10 @@ public final class NumberUtils {
      */
     public static int parseInt(final CharSequence value) {
         try {
-            if (USE_FAST_NUMBER_PARSER) {
-                return NumberParser.getInteger(value);
-            }
-            return Integer.parseInt(value.toString());
+            return NumberParser.getInteger(value);
         } catch (NumberFormatException nfe) {
-            // ignore
+        	return NULL_INT;
         }
-        return NULL_INT;
     }
 
     /**
@@ -127,14 +113,10 @@ public final class NumberUtils {
      */
     public static long parseLong(final CharSequence value) {
         try {
-            if (USE_FAST_NUMBER_PARSER) {
-                return NumberParser.getLong(value);
-            }
-            return Long.parseLong(value.toString());
+            return NumberParser.getLong(value);
         } catch (NumberFormatException nfe) {
-            // ignore
+        	return NULL_LONG;
         }
-        return NULL_LONG;
     }
 
     /**
@@ -147,21 +129,17 @@ public final class NumberUtils {
      */
     public static short parseShort(final CharSequence value) {
         try {
-            if (USE_FAST_NUMBER_PARSER) {
-                final int val = NumberParser.getInteger(value);
-                if (val <= Short.MIN_VALUE) {
-                    return Short.MIN_VALUE;
-                }
-                if (val >= Short.MAX_VALUE) {
-                    return Short.MAX_VALUE;
-                }
-                return (short) val;
+            final int val = NumberParser.getInteger(value);
+            if (val <= Short.MIN_VALUE) {
+                return Short.MIN_VALUE;
             }
-            return Short.parseShort(value.toString());
+            if (val >= Short.MAX_VALUE) {
+                return Short.MAX_VALUE;
+            }
+            return (short) val;
         } catch (NumberFormatException nfe) {
-            // ignore
+        	return NULL_SHORT;
         }
-        return NULL_SHORT;
     }
 
     private NumberUtils() {
